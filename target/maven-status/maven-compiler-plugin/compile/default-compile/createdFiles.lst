@@ -1,0 +1,10 @@
+com/shape/shapetest/service/impl/VesselServiceImpl.class
+com/shape/shapetest/model/Vessel.class
+com/shape/shapetest/model/Equipment.class
+com/shape/shapetest/ShapeTestApplication.class
+com/shape/shapetest/exception/DuplicatedCodeException.class
+com/shape/shapetest/api/VesselAPI.class
+com/shape/shapetest/service/VesselService.class
+com/shape/shapetest/configuration/ErrorHandler.class
+com/shape/shapetest/repository/EquipmentRepository.class
+com/shape/shapetest/repository/VesselRepository.class

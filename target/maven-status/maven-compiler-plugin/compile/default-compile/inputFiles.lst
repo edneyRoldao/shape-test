@@ -1,0 +1,10 @@
+/home/edneyroldao/workspace/personal/java-projects/shape-test/src/main/java/com/shape/shapetest/repository/EquipmentRepository.java
+/home/edneyroldao/workspace/personal/java-projects/shape-test/src/main/java/com/shape/shapetest/service/VesselService.java
+/home/edneyroldao/workspace/personal/java-projects/shape-test/src/main/java/com/shape/shapetest/model/Equipment.java
+/home/edneyroldao/workspace/personal/java-projects/shape-test/src/main/java/com/shape/shapetest/ShapeTestApplication.java
+/home/edneyroldao/workspace/personal/java-projects/shape-test/src/main/java/com/shape/shapetest/service/impl/VesselServiceImpl.java
+/home/edneyroldao/workspace/personal/java-projects/shape-test/src/main/java/com/shape/shapetest/repository/VesselRepository.java
+/home/edneyroldao/workspace/personal/java-projects/shape-test/src/main/java/com/shape/shapetest/exception/DuplicatedCodeException.java
+/home/edneyroldao/workspace/personal/java-projects/shape-test/src/main/java/com/shape/shapetest/configuration/ErrorHandler.java
+/home/edneyroldao/workspace/personal/java-projects/shape-test/src/main/java/com/shape/shapetest/model/Vessel.java
+/home/edneyroldao/workspace/personal/java-projects/shape-test/src/main/java/com/shape/shapetest/api/VesselAPI.java
