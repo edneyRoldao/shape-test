@@ -1,5 +1,6 @@
 package com.shape.shapetest.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class Operation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Transient
     private String code;
 
     @Column(length = 256, nullable = false)
@@ -24,5 +26,10 @@ public class Operation {
 
     @Column(length = 12, precision = 2, nullable = false)
     private Float cost;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "equipment_id", referencedColumnName = "id")
+    private Equipment equipment;
 
 }

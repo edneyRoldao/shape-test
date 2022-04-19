@@ -1,5 +1,6 @@
 package com.shape.shapetest.service.impl;
 
+import com.shape.shapetest.dto.VesselOperation;
 import com.shape.shapetest.exceprion.EquipmentNotFoundException;
 import com.shape.shapetest.exceprion.VesselNotFoundException;
 import com.shape.shapetest.model.Equipment;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -74,8 +76,10 @@ public class VesselServiceImpl implements VesselService {
     public void addOperationOrder(Operation operation) {
         log.info("stage:init VesselServiceImpl.addOperationOrder operation:{}", operation);
 
-        equipmentRepository.findByCodeAndActiveTrue(operation.getCode())
+        Equipment equipment = equipmentRepository.findByCodeAndActiveTrue(operation.getCode())
                 .orElseThrow(EquipmentNotFoundException::new);
+
+        operation.setEquipment(equipment);
 
         operationRepository.save(operation);
 
@@ -83,13 +87,49 @@ public class VesselServiceImpl implements VesselService {
     }
 
     @Override
-    public Double sumTotalOperationCostByEquipment(String equipmentCode) {
-        log.info("stage:init VesselAPI.someTotalOperationCostByEquipment equipmentCode:{}", equipmentCode);
+    public Double sumTotalOperationCostByEquipmentCode(String equipmentCode) {
+        log.info("stage:init VesselServiceImpl.sumTotalOperationCostByEquipmentCode equipmentCode:{}", equipmentCode);
 
-        Double total = operationRepository.findAllByCode(equipmentCode).stream().mapToDouble(Operation::getCost).sum();
+        Double total = operationRepository.findAllByEquipmentCode(equipmentCode).stream().mapToDouble(Operation::getCost).sum();
 
-        log.info("stage:end VesselAPI.someTotalOperationCostByEquipment - process has been finished - totalCost:{}", total);
+        log.info("stage:end VesselServiceImpl.sumTotalOperationCostByEquipmentCode - process has been finished - totalCost:{}", total);
         return total;
+    }
+
+    @Override
+    public Double sumTotalOperationCostByEquipmentName(String equipmentName) {
+        log.info("stage:init VesselServiceImpl.sumTotalOperationCostByEquipmentName equipmentName:{}", equipmentName);
+
+        Double total = operationRepository.findAllByEquipmentName(equipmentName).stream().mapToDouble(Operation::getCost).sum();
+
+        log.info("stage:end VesselServiceImpl.sumTotalOperationCostByEquipmentName - process has been finished - totalCost:{}", total);
+        return total;
+    }
+
+    @Override
+    public List<VesselOperation> getOperationAverageCostByVessel() {
+        log.info("stage:init VesselServiceImpl.getOperationAverageCostByVessel");
+        List<VesselOperation> result = new ArrayList<>();
+
+        vesselRepository.findAll().forEach(vessel -> {
+
+            List<Long> equipmentIds = equipmentRepository.findAllByVesselCodeAndActiveTrue(vessel.getCode())
+                    .stream().map(Equipment::getId)
+                    .collect(Collectors.toList());
+
+            List<Operation> operations = operationRepository.findAllByEquipmentIdIn(equipmentIds);
+            Double average = operations.stream().mapToDouble(Operation::getCost).average().orElse(Double.NaN);
+
+            result.add(VesselOperation
+                    .builder()
+                    .vesselCode(vessel.getCode())
+                    .averageOperation(average)
+                    .totalOperation(operations.size())
+                    .build());
+        });
+
+        log.info("stage:end VesselServiceImpl.getOperationAverageCostByVessel - process has been finished");
+        return result;
     }
 
 }

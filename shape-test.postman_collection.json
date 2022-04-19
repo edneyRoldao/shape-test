@@ -1,0 +1,244 @@
+{
+	"info": {
+		"_postman_id": "1f31a54e-b5b7-497a-a2e0-a0bff071486e",
+		"name": "shape-test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "insert vessel",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\": \"vcm1234\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/vessels/insert-vessel",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"vessels",
+						"insert-vessel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "insert equipment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\": \"eqp1234\",\n    \"name\": \"processor\",\n    \"location\": \"Brazil\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/vessels/:vesselCode/insert-equipment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"vessels",
+						":vesselCode",
+						"insert-equipment"
+					],
+					"variable": [
+						{
+							"key": "vesselCode",
+							"value": "vcm1234"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "inactive equipment",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    \"eqp1234\"\n]\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/vessels/disable-equipments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"vessels",
+						"disable-equipments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find all active equipments by vessel",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/vessels/:vesselCode/active-equipments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"vessels",
+						":vesselCode",
+						"active-equipments"
+					],
+					"variable": [
+						{
+							"key": "vesselCode",
+							"value": "vcm1234"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add operation order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\": \"eqp1234\",\n    \"type\": \"replacement\",\n    \"cost\": 1000.00\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/vessels/add-operation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"vessels",
+						"add-operation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "total cost in operation by code",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/vessels/equipment-code/:equipmentCode/total-cost-operations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"vessels",
+						"equipment-code",
+						":equipmentCode",
+						"total-cost-operations"
+					],
+					"variable": [
+						{
+							"key": "equipmentCode",
+							"value": "eqp1234"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "total cost in operation by name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/vessels/equipment-name/:equipmentName/total-cost-operations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"vessels",
+						"equipment-name",
+						":equipmentName",
+						"total-cost-operations"
+					],
+					"variable": [
+						{
+							"key": "equipmentName",
+							"value": "processor"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "total cost in operation average",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/vessels/operations/average-cost",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"vessels",
+						"operations",
+						"average-cost"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

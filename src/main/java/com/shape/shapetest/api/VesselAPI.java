@@ -1,5 +1,6 @@
 package com.shape.shapetest.api;
 
+import com.shape.shapetest.dto.VesselOperation;
 import com.shape.shapetest.model.Equipment;
 import com.shape.shapetest.model.Operation;
 import com.shape.shapetest.model.Vessel;
@@ -64,13 +65,31 @@ public class VesselAPI {
         return ResponseEntity.status(201).body("Operation order has been created");
     }
 
-    @GetMapping("equipment/{equipmentCode}/total-cost-operations")
-    public ResponseEntity<Double> getTotalOperationCostByEquipment(@PathVariable String equipmentCode) {
-        log.info("stage:init VesselAPI.getTotalOperationCostByEquipment equipmentCode:{}", equipmentCode);
-        Double total = service.sumTotalOperationCostByEquipment(equipmentCode);
+    @GetMapping("equipment-code/{equipmentCode}/total-cost-operations")
+    public ResponseEntity<Double> getTotalOperationCostByEquipmentCode(@PathVariable String equipmentCode) {
+        log.info("stage:init VesselAPI.getTotalOperationCostByEquipmentCode equipmentCode:{}", equipmentCode);
+        Double total = service.sumTotalOperationCostByEquipmentCode(equipmentCode);
 
-        log.info("stage:end VesselAPI.getTotalOperationCostByEquipment - process has been finished - totalCost:{}", total);
+        log.info("stage:end VesselAPI.getTotalOperationCostByEquipmentCode - process has been finished - totalCost:{}", total);
         return ResponseEntity.status(200).body(total);
+    }
+
+    @GetMapping("equipment-name/{equipmentName}/total-cost-operations")
+    public ResponseEntity<Double> getTotalOperationCostByEquipmentName(@PathVariable String equipmentName) {
+        log.info("stage:init VesselAPI.getTotalOperationCostByEquipmentName equipmentName:{}", equipmentName);
+        Double total = service.sumTotalOperationCostByEquipmentName(equipmentName);
+
+        log.info("stage:end VesselAPI.getTotalOperationCostByEquipmentName - process has been finished - totalCost:{}", total);
+        return ResponseEntity.status(200).body(total);
+    }
+
+    @GetMapping("operations/average-cost")
+    public ResponseEntity<List<VesselOperation>> getAverageCostInOperationByVessel() {
+        log.info("stage:init VesselAPI.getAverageCostInOperationByVessel ");
+        List<VesselOperation> response = service.getOperationAverageCostByVessel();
+
+        log.info("stage:end VesselAPI.getTotalOperationCostByEquipmentName - process has been finished");
+        return ResponseEntity.status(200).body(response);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.shape.shapetest.service;
 
+import com.shape.shapetest.dto.VesselOperation;
 import com.shape.shapetest.model.Equipment;
 import com.shape.shapetest.model.Operation;
 import com.shape.shapetest.model.Vessel;
@@ -18,6 +19,10 @@ public interface VesselService {
 
     void addOperationOrder(Operation operation);
 
-    Double sumTotalOperationCostByEquipment(String equipmentCode);
+    Double sumTotalOperationCostByEquipmentCode(String equipmentCode);
+
+    Double sumTotalOperationCostByEquipmentName(String equipmentName);
+
+    List<VesselOperation> getOperationAverageCostByVessel();
 
 }
